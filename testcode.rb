@@ -1,3 +1,1 @@
-10.times do |n|
-  puts n
-end
+123_000 + 19

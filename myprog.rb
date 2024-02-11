@@ -2,6 +2,7 @@
 
 require_relative 'tokenizer'
 require_relative 'parser'
+require 'byebug'
 
 puts "#{ARGV}"
 
@@ -25,13 +26,18 @@ end
 filename = ARGV[0]
 
 file = File.new filename
+token_stream = []
+ln = 0
 
 begin 
   while output = file.readline
-    puts output
-    # do sthg with code
+    ln += 1
+    next if output.match?(/^\n$/)
+    token_stream << tokenize(output, ln)
   end
 rescue EOFError
   puts ''
   puts 'end of file reached'
 end
+
+p token_stream
